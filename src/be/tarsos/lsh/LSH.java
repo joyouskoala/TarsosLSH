@@ -63,14 +63,14 @@ public class LSH {
 	 */
 	public void buildIndex(int numberOfHashes, int numberOfHashTables){
 		// Do we want to deserialize or build a new index???
-		// index = new Index(hashFamily, numberOfHashes, numberOfHashTables);
+		index = new Index(hashFamily, numberOfHashes, numberOfHashTables);
 		// Deserialization can cause duplicates?
-		index = Index.deserialize(hashFamily, numberOfHashes, numberOfHashTables);
+		//index = Index.deserialize(hashFamily, numberOfHashes, numberOfHashTables);
 		if(dataset != null){
 			for(Vector vector : dataset){
 				index.index(vector);
 			}
-			Index.serialize(index);
+			//Index.serialize(index);
 		}
 	}
 	
