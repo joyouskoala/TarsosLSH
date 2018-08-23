@@ -61,17 +61,25 @@ public class LSH {
 	 * @param numberOfHashTables
 	 *            The number of hash tables to use.
 	 */
-	public void buildIndex(int numberOfHashes, int numberOfHashTables){
+	public long buildIndex(int numberOfHashes, int numberOfHashTables){
 		// Do we want to deserialize or build a new index???
 		// index = new Index(hashFamily, numberOfHashes, numberOfHashTables);
 		// Deserialization can cause duplicates?
-		index = Index.deserialize(hashFamily, numberOfHashes, numberOfHashTables);
+		//index = Index.deserialize(hashFamily, numberOfHashes, numberOfHashTables);
+		index = new Index(hashFamily, numberOfHashes, numberOfHashTables);
+		long iStartT=0, iEndT=0;
 		if(dataset != null){
+		  /*for(Vector vector : dataset){
+				index.index(vector);
+			}*/
+		  iStartT = System.nanoTime();
 			for(Vector vector : dataset){
 				index.index(vector);
 			}
-			Index.serialize(index);
+			iEndT = System.nanoTime();
+			//Index.serialize(index);
 		}
+		return iEndT-iStartT;
 	}
 	
 	/**

@@ -113,8 +113,8 @@ public class CommandLineInterface {
 			printLine();
 			startBenchmark();
 		}else{
-			printPrefix();
-			printLine();
+			//printPrefix();
+			//printLine();
 			startLSH();
 		}		
 	}
@@ -179,17 +179,26 @@ public class CommandLineInterface {
 			}
 		}else{
 			LSH lsh = new LSH(dataset, family);
-			lsh.buildIndex(numberOfHashes,numberOfHashTables);		
+			long iTotalT = lsh.buildIndex(numberOfHashes,numberOfHashTables);
+			double iAvgT = (double)(iTotalT)/dataset.size();
+			System.out.print(iAvgT);
+			long qTotalT=0;
 			if(queries != null){
 				for(Vector query:queries){
+				  long qStartT, qEndT;
+				  qStartT = System.nanoTime();
 					List<Vector> neighbours = lsh.query(query, numberOfNeighbours);
-					System.out.print(query.getKey()+";");
+					qEndT = System.nanoTime();
+					qTotalT += qEndT-qStartT;
+					//System.out.print(query.getKey()+";");
 					for(Vector neighbour:neighbours){
-						System.out.print(neighbour.getKey() + ";");
+						//System.out.print(neighbour.getKey() + ";");
 					}
-					System.out.print("\n");
+					//System.out.print("\n");
 				}
 			}
+			double qAvgT = (double)qTotalT/queries.size();
+			System.out.println(" "+qAvgT);
 		}
 	}
 	
