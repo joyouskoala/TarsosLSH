@@ -220,12 +220,15 @@ public class LSH {
 		}catch(Exception e){
 			firstColumnIsKey = true;
 		}
+		int counter = 0;
 		int dimensions = firstColumnIsKey ? data.get(0).length - 1 : data.get(0).length;
 		int startIndex = firstColumnIsKey ? 1 : 0;
 		for(String[] row : data){
 			Vector item = new Vector(dimensions);
 			if(firstColumnIsKey){
 				item.setKey(row[0]);
+			} else {
+			  item.setKey(Integer.toString(counter++));
 			}
 			for (int d = startIndex; d < row.length; d++) {
 				double value = Double.parseDouble(row[d]);
