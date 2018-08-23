@@ -21,6 +21,7 @@
 package be.tarsos.lsh.families;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class CityBlockHashFamily implements HashFamily {
 
@@ -37,8 +38,8 @@ public class CityBlockHashFamily implements HashFamily {
 	}
 	
 	@Override
-	public HashFunction createHashFunction(){
-		return new CityBlockHash(dimensions, w);
+	public HashFunction createHashFunction(Random rand){
+		return new CityBlockHash(dimensions, w, rand);
 	}
 
 	@Override

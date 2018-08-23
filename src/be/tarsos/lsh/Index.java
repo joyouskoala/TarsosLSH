@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -78,9 +79,10 @@ public class Index implements Serializable{
 	 */
 	public Index(HashFamily family,int numberOfHashes, int numberOfHashTables){
 		this.family = family;
+		Random rand = new Random(0xDEADBEEF);
 		hashTable = new ArrayList<HashTable>();
 		for(int i = 0 ; i < numberOfHashTables ; i++ ){
-			hashTable.add(new HashTable(numberOfHashes, family));
+			hashTable.add(new HashTable(numberOfHashes, family, rand));
 		}
 		evaluated = 0;
 	}
