@@ -113,8 +113,8 @@ public class CommandLineInterface {
 			printLine();
 			startBenchmark();
 		}else{
-			printPrefix();
-			printLine();
+			//printPrefix();
+			//printLine();
 			startLSH();
 		}		
 	}
